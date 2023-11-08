@@ -3,7 +3,13 @@ import mongoose, { set } from 'mongoose';
 import Book from './models/db.js';
 import dotenv from 'dotenv';
 import { dbcon, dbclose, uri } from './models/db_server.js';
-import { timeapi, nowTime } from './clock.js';
+import { timeapi, nowTime, AMPM } from './clock.js';
+import readline from 'readline'
+
+
+
+
+
 dotenv.config();
 console.log(2)
 var today = new Date();
@@ -228,8 +234,8 @@ const methA = async () => {
 const data = [
   { name: "DL_Satta", time: "2.30" },//not working
 
-  { name: "DL_bazar", time: "3.00" },//-3.00 
-  { name: "Shree Ganesh", time: "4.50" },//-4.50
+  { name: "DL_bazar", time: "4.10" },//-3.00 
+  { name: "Shree Ganesh", time: "4.11" },//-4.50
 
   { name: "Faridabad", time: "6.00" },//-6.00
   { name: "Gajiyabad", time: "9.00" },//-9.00 
@@ -242,7 +248,10 @@ const data = [
 // readdatabase();
 
 timeapi()
-sleep(5000).then(()=>{console.log(nowTime," ",setdate)})
+sleep(5000).then(()=>{
+  // console.clear()
+  console.log("\n",setdate)
+})
 const now = new Date()
   sleep(6000).then(()=>{
   timeString = nowTime;
@@ -251,12 +260,19 @@ let timeString = now.toLocaleTimeString();
 
 function displayCurrentTime() 
 {
+  try {
+    const a = nowTime.split(':');
+    const currentTime = `${a[0]}.${a[1]}`;
+    const AM = AMPM.includes('AM');
+    
+    timeString = nowTime;
+    // console.clear();
 try {
-  const a = timeString.split(':');
-  const currentTime = `${a[0]}.${a[1]}`;
-  const AM = a[2].includes('AM');
-  timeString = nowTime;
-  // console.log(timeString)
+  readline.cursorTo(process.stdout, 0);
+  process.stdout.write(timeString);
+} catch (error) {
+  console.log(error)
+}
   
  
   const matchingNames = data.filter((item) => item.time === currentTime);

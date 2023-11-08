@@ -1,5 +1,5 @@
 import axios from "axios";
-
+var AMPM='PM'
 console.log(1)
 let nowTime = new Date();
 //  clock function with 12 hour format
@@ -29,7 +29,8 @@ const clock = (hour, minutes, seconds, AMPM) => {
       date.setMinutes(minutes);
       date.setSeconds(seconds);
       nowTime = date.toLocaleTimeString();
-      // console.log(nowTime);
+      // console.log(date.);
+
 
     }, 1000);
   };
@@ -47,4 +48,4 @@ const clock = (hour, minutes, seconds, AMPM) => {
       })
     }
   
-export { timeapi ,nowTime };
+export { timeapi ,nowTime, AMPM };

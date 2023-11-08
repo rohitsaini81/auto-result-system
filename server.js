@@ -9,7 +9,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const uri = `mongodb+srv://${process.env.URI_PASS}@cluster0.8t0hk4y.mongodb.net/${process.env.DATABASE}`;
 
-
 app.use(cors());
 app.use(bodyParser.json());
 console.log(3)
@@ -17,7 +16,7 @@ console.log(3)
 const dbcon = async (uri) => {
   try {
     await mongoose.connect(uri);
-    console.log("db on!");
+    console.log("\n db on!");
   } catch (error) {
     console.log("ab kya hua \n",error);
   }
