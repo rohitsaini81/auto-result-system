@@ -192,12 +192,12 @@ const Disawar = () => {
   methA().then((res) => {
     today = new Date();
     setdate = today.toLocaleDateString();
-    const yest = res[0][0]
-    console.log(yest);
+
     const obj = {
       "name": "disawar",
-      "today": res[0][0].disawer,
-      "date": setdate
+      "today": res[0][1].disawer,
+      "date": setdate,
+      "yesterday": res[0][0].disawer
     }
     console.log(obj)
     try {
@@ -277,7 +277,7 @@ try {
  
   const matchingNames = data.filter((item) => item.time === currentTime);
 
-  if (!AM && matchingNames.length > 0) {
+  if (AM && matchingNames.length > 0) {
     matchingNames.forEach((item) => {
       switch (item.name) {
         case "DL_Satta":
