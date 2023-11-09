@@ -1,7 +1,8 @@
 import axios from "axios";
-var AMPM='PM'
-console.log(1)
+import { now } from "mongoose";
 let nowTime = new Date();
+var AMPM=nowTime.getHours() >= 12 ? 'PM' : 'AM';
+console.log(1)
 //  clock function with 12 hour format
 const clock = (hour, minutes, seconds, AMPM) => {
     const date = new Date();
@@ -42,7 +43,8 @@ const clock = (hour, minutes, seconds, AMPM) => {
       .then((res) => res.data)
       .then((data)=>{
         const {hour,minute,seconds} = data;
-        clock(hour,minute,seconds,"PM");
+        AMPM = hour >= 12 ? 'PM' : 'AM';
+        clock(hour,minute,seconds,AMPM);
         console.log("time updated")
       
       })
