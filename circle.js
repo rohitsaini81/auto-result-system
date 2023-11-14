@@ -148,7 +148,7 @@ const Gajiyabad = () => {
   gajiyabadCalled = true;
   methA().then((res) => {
     const obj = {
-      "name": "gajiyabad",
+      "name": "gaziyabad",
       "today": res[0][0].gaziabad,
       "yesterday": res[0][1].gaziabad,
       "date": setdate
@@ -249,7 +249,6 @@ const data = [
 
 timeapi()
 sleep(5000).then(()=>{
-  // console.clear()
   console.log("\n",setdate)
 })
 const now = new Date()
@@ -258,21 +257,24 @@ const now = new Date()
 })
 let timeString = now.toLocaleTimeString();
 
+
+
+// main function for display time and call function
 function displayCurrentTime() 
 {
+  // console.log(nowTime, AMPM)
   try {
     const a = nowTime.split(':');
     const currentTime = `${a[0]}.${a[1]}`;
     const AM = AMPM.includes('AM');
     timeString = nowTime;
-    const seconds = a[2].split(' ')[0];
-    if (a[1] == 30 || a[1] == '00'){
-      console.log(currentTime,AMPM,"\n")
-    }
-    // console.clear();
+    const seconds = a[2].split(' ');
+
+
+// console.log(timeString,AM)
 try {
   readline.cursorTo(process.stdout, 0);
-  process.stdout.write(currentTime+"."+ seconds[0]+seconds[1]+" "+ AMPM);
+  process.stdout.write(timeString +""+  AMPM);
 } catch (error) {
   console.log(error)
 }
@@ -280,7 +282,7 @@ try {
  
   const matchingNames = data.filter((item) => item.time === currentTime);
 
-  if (AM && matchingNames.length > 0) {
+  if (!AM && matchingNames.length > 0) {
     matchingNames.forEach((item) => {
       switch (item.name) {
         case "DL_Satta":

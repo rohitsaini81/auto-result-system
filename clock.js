@@ -38,7 +38,7 @@ const clock = (hour, minutes, seconds) => {
       date.setMinutes(minutes);
       date.setSeconds(seconds);
       nowTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + ' ' + period;
-      console.log(nowTime, AMPM)
+      // console.log(nowTime, AMPM)
 
 
     }, 1000);
