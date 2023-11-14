@@ -271,7 +271,7 @@ function displayCurrentTime()
     const seconds = a[2].split(' ');
 
 
-// console.log(timeString,AM)
+console.log(timeString,AM)
 try {
   readline.cursorTo(process.stdout, 0);
   process.stdout.write(timeString +""+  AMPM);
