@@ -23,7 +23,7 @@ const dbcon = async (uri) => {
 };
 
 import "./circle.js";
-import { setdate } from './circle.js';
+import { setdate, timeString } from './circle.js';
 
 dbcon(uri);
 app.get('/api/6', async(req,res)=>{
@@ -33,7 +33,17 @@ app.get('/api/6', async(req,res)=>{
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-  
+})
+app.get('/api/7', async(req,res)=>{
+  try {
+    const pro = await Book.find();
+    res.status(200).send(pro)
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+})
+app.get('/srv/inf',(req,res)=>{
+  res.send(timeString)
 })
 
 // Start the server
