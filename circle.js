@@ -276,7 +276,7 @@ function displayCurrentTime()
 try {
   readline.cursorTo(process.stdout, 0);
   process.stdout.write(timeString +" "+  AM);
-  
+
 } catch (error) {
   console.log(error)
 }
@@ -332,5 +332,5 @@ try {
   console.log("failed")
 } 
 }
-export {setdate}
+export {setdate,timeString}
 setInterval(displayCurrentTime, 1000);
