@@ -6,30 +6,31 @@ console.log(1)
 const clock = (hour, minutes, seconds) => {
     let period = hour >= 12 ? 'PM' : 'AM';
     const date = new Date();
-    date.setHours(hour + (period === 'PM' && hour !== 12 ? 12 : 0));
+    date.setHours(hour);
     date.setMinutes(minutes);
     date.setSeconds(seconds);
   
     setInterval(() => {
       seconds++;
-      if (seconds === 60) {
+      if (seconds === 59) {
         minutes++;
-        seconds = 1;
+        seconds = 0;
       }
-      if (minutes === 60) {
+      if (minutes === 59) {
         hour++;
-        minutes = 1;
+        minutes = 0;
       }
       if (hour == 12) {
         if (period == 'AM') {
           period = 'PM';
-        }else{
+        }
+        if(period == 'PM'){
           period = 'AM';
         }
 
       }
 
-      if (hour == 12) {
+      if (hour == 13) {
         AMPM = period;
         hour = 1;        
       }
@@ -37,7 +38,7 @@ const clock = (hour, minutes, seconds) => {
       date.setHours(hour);
       date.setMinutes(minutes);
       date.setSeconds(seconds);
-      nowTime = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + ' ' + period;
+      nowTime = date.getHours() + ':' +(minutes < 10 ? '0' : '') +  date.getMinutes() + ':' + (seconds < 10 ? '0' : '') +date.getSeconds() + ' ' + period;
       // console.log(nowTime, AMPM)
 
 

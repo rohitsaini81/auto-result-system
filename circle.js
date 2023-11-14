@@ -188,11 +188,11 @@ const Disawar = () => {
   if (disawarCalled) {
     return false;
   }
-  console.log("Disawar");
+  console.log("\n Disawar");
   methA().then((res) => {
     today = new Date();
     setdate = today.toLocaleDateString();
-
+console.log(setdate)
     const obj = {
       "name": "disawar",
       "today": res[0][1].disawer,
@@ -207,7 +207,8 @@ const Disawar = () => {
       console.log("desiwer result error")   
     }
     disawarCalled = true;
-  }).catch((e)=>console.log("disawer error 2"));
+  })
+  .catch((e)=>console.log("disawer error 2"));
   sleep(60000)
   galiCalled = false;
   return true;
@@ -232,14 +233,14 @@ const methA = async () => {
   }
 };
 const data = [
-  { name: "DL_Satta", time: "2.30" },//not working
+  { name: "DL_Satta", time: "2.30" },//->0.00
 
-  { name: "DL_bazar", time: "4.10" },//-3.00 
-  { name: "Shree Ganesh", time: "4.11" },//-4.50
+  { name: "DL_bazar", time: "3.15" },//->3.00 
+  { name: "Shree Ganesh", time: "4.11" },//->4.50
 
   { name: "Faridabad", time: "6.00" },//-6.00
   { name: "Gajiyabad", time: "9.00" },//-9.00 
-  { name: "Gali", time: "11.30" },//-11.30
+  { name: "Gali", time: "11.30" },//-E.11.30
   { name: "Disawar", time: "5.00" },//-5.00
 ];
 
@@ -271,10 +272,10 @@ function displayCurrentTime()
     const seconds = a[2].split(' ');
 
 
-console.log(timeString,AM)
+// console.log(timeString,AM)
 try {
   readline.cursorTo(process.stdout, 0);
-  process.stdout.write(timeString +""+  AMPM);
+  process.stdout.write(timeString +" "+  AM);
 } catch (error) {
   console.log(error)
 }
@@ -282,7 +283,7 @@ try {
  
   const matchingNames = data.filter((item) => item.time === currentTime);
 
-  if (!AM && matchingNames.length > 0) {
+  if (AM && matchingNames.length > 0) {
     matchingNames.forEach((item) => {
       switch (item.name) {
         case "DL_Satta":
