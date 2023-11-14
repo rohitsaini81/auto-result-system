@@ -53,7 +53,7 @@ const clock = (hour, minutes, seconds) => {
       .then((res) => res.data)
       .then((data)=>{
         const {hour,minute,seconds} = data;
-        clock(11,58,seconds);
+        clock(hour,minute,seconds);
         console.log("time updated")
       
       })
