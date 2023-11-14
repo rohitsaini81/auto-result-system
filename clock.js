@@ -20,18 +20,19 @@ const clock = (hour, minutes, seconds) => {
         hour++;
         minutes = 0;
       }
-      if (hour == 12) {
+      if (hour == 12 && minutes == 0 && seconds == 0) {
+        
         if (period == 'AM') {
           period = 'PM';
         }
-        if(period == 'PM'){
+        else{
           period = 'AM';
         }
+        AMPM = period;
 
       }
 
       if (hour == 13) {
-        AMPM = period;
         hour = 1;        
       }
 
@@ -52,7 +53,7 @@ const clock = (hour, minutes, seconds) => {
       .then((res) => res.data)
       .then((data)=>{
         const {hour,minute,seconds} = data;
-        clock(hour,minute,seconds);
+        clock(11,58,seconds);
         console.log("time updated")
       
       })
