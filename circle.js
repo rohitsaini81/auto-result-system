@@ -272,15 +272,19 @@ function displayCurrentTime()
     const seconds = a[2].split(' ');
 
 
-// console.log(timeString,AM)
-try {
-  readline.cursorTo(process.stdout, 0);
-  process.stdout.write(timeString +" "+  AM);
-
-} catch (error) {
-  console.log(error)
-}
+if (process.env.DEV) {
+  try {
+    readline.cursorTo(process.stdout, 0);
+    process.stdout.write(timeString +" "+  AM);
   
+  } catch (error) {
+    console.log(error)
+  }
+} else {
+console.log(timeString,AM)
+    
+  }
+
  
   const matchingNames = data.filter((item) => item.time === currentTime);
 
