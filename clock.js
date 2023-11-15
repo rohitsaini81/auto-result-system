@@ -1,63 +1,53 @@
 import axios from "axios";
-let nowTime = new Date();
-var AMPM=nowTime.getHours() >= 12 ? 'PM' : 'AM';
-console.log(1)
-//  clock function with 12 hour format
+
+let nowTime = "";
+let AMPM = "";
+
+// clock function with 12-hour format
 const clock = (hour, minutes, seconds) => {
-    let period = hour >= 12 ? 'PM' : 'AM';
-    const date = new Date();
-    date.setHours(hour);
-    date.setMinutes(minutes);
-    date.setSeconds(seconds);
-  
-    setInterval(() => {
-      seconds++;
-      if (seconds === 59) {
-        minutes++;
-        seconds = 0;
-      }
-      if (minutes === 59) {
-        hour++;
-        minutes = 0;
-      }
-      if (hour == 12 && minutes == 0 && seconds == 0) {
-        
-        if (period == 'AM') {
-          period = 'PM';
-        }
-        else{
-          period = 'AM';
-        }
-        AMPM = period;
+  const updateClock = () => {
+    seconds++;
 
-      }
-
-      if (hour == 13) {
-        hour = 1;        
-      }
-
-      date.setHours(hour);
-      date.setMinutes(minutes);
-      date.setSeconds(seconds);
-      nowTime = date.getHours() + ':' +(minutes < 10 ? '0' : '') +  date.getMinutes() + ':' + (seconds < 10 ? '0' : '') +date.getSeconds() + ' ' + period;
-      // console.log(nowTime, AMPM)
-
-
-    }, 1000);
-  };
-  
-
-  const timeapi = () => {
-    const uri = 'https://timeapi.io/api/Time/current/zone?timeZone=Asia/Kolkata';
-    axios.get(uri)
-      .then((res) => res.data)
-      .then((data)=>{
-        const {hour,minute,seconds} = data;
-        clock(hour,minute,seconds);
-        console.log("time updated")
-      
-      })
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
     }
-  timeapi()
 
-export { timeapi ,nowTime, AMPM };
+    if (minutes === 60) {
+      minutes = 0;
+      hour++;
+    }
+
+    if (hour === 12 && minutes === 0 && seconds === 0) {
+      AMPM = AMPM === 'AM' ? 'PM' : 'AM';
+    }
+
+    if (hour === 13) {
+      hour = 1;
+    }
+
+    nowTime = `${hour}:${(minutes < 10 ? '0' : '') + minutes}:${(seconds < 10 ? '0' : '') + seconds} ${AMPM}`;
+    // console.log(nowTime);
+  };
+
+  setInterval(updateClock, 1000);
+};
+
+const timeapi = () => {
+  const uri = 'https://timeapi.io/api/Time/current/zone?timeZone=Asia/Kolkata';
+  axios.get(uri)
+    .then((res) => res.data)
+    .then((data) => {
+      const { hour, minute, seconds } = data;
+      AMPM = hour >= 12 ? 'PM' : 'AM';
+      clock(hour % 12, minute, seconds); // Use hour % 12 to convert 24-hour format to 12-hour format
+      console.log("time updated");
+    })
+    .catch((error) => {
+      console.error("Error fetching time:", error);
+    });
+};
+
+timeapi();
+
+export { timeapi, nowTime, AMPM };
