@@ -240,7 +240,7 @@ const data = [
 
   { name: "Faridabad", time: "6.00" },//-6.00
   { name: "Gajiyabad", time: "9.00" },//-9.00 
-  { name: "Gali", time: "11.30" },//-E.11.30
+  { name: "Gali", time: "11.49" },//-E.11.30
   { name: "Disawar", time: "5.00" },//-5.00
 ];
 
@@ -272,19 +272,19 @@ function displayCurrentTime()
     const seconds = a[2].split(' ');
 
 
-console.log(timeString,AM)
-// try {
-//   readline.cursorTo(process.stdout, 0);
-//   process.stdout.write(timeString +" "+  AM);
+// console.log(timeString,AM)
+try {
+  readline.cursorTo(process.stdout, 0);
+  process.stdout.write(timeString +" "+  AM);
 
-// } catch (error) {
-//   console.log(error)
-// }
+} catch (error) {
+  console.log(error)
+}
   
  
   const matchingNames = data.filter((item) => item.time === currentTime);
 
-  if (AM && matchingNames.length > 0) {
+  if (!AM && matchingNames.length > 0) {
     matchingNames.forEach((item) => {
       switch (item.name) {
         case "DL_Satta":
