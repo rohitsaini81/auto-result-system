@@ -240,7 +240,7 @@ const data = [
 
   { name: "Faridabad", time: "6.00" },//-6.00
   { name: "Gajiyabad", time: "9.00" },//-9.00 
-  { name: "Gali", time: "11.49" },//-E.11.30
+  { name: "Gali", time: "11.55" },//-E.11.30
   { name: "Disawar", time: "5.00" },//-5.00
 ];
 
