@@ -27,7 +27,7 @@ const clock = (hour, minutes, seconds) => {
     }
 
     nowTime = `${hour}:${(minutes < 10 ? '0' : '') + minutes}:${(seconds < 10 ? '0' : '') + seconds} ${AMPM}`;
-    // console.log(nowTime);
+    console.log(nowTime);
   };
 
   setInterval(updateClock, 1000);
