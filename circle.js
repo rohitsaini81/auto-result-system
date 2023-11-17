@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import { dbcon, dbclose, uri } from './models/db_server.js';
 import { timeapi, nowTime, AMPM } from './clock.js';
 import readline from 'readline'
-import { Afunc, Bfunc } from "./hp-apifunc.js";
+import FetchResult from "./hp-apifunc.js";
 
 
 
@@ -61,11 +61,13 @@ let disawarCalled = false;
 
 // Dl_Satta ------------------>
 const DL_Satta = async () => {
-  console.log("DL_Satta");
+  today = new Date();
+    setdate = today.toLocaleDateString();
   if (dlSattaCalled) {
     return false;
   }
-
+  
+  console.log("DL_Satta");
   const obj = {name:"DL_Satta",today:"00",yesterday:"-0",date:setdate}
   createdata(obj);
   dlSattaCalled = true;
@@ -188,6 +190,8 @@ const Disawar = () => {
     return false;
   }
   console.log("\n Disawar");
+  today = new Date();
+    setdate = today.toLocaleDateString();
   methA().then((res) => {
     today = new Date();
     setdate = today.toLocaleDateString();
@@ -231,16 +235,18 @@ const methA = async () => {
     return("error");
   }
 };
+
+
 const data = [
-  { name: "DL_Satta", time: "2.02" },//->0.00
+  { name: "DL_Satta", time:  process.env.DL_Satta || "2.40"},//->0.00
 
-  { name: "DL_bazar", time: "3.15" },//->3.00 
-  { name: "Shree Ganesh", time: "4.50" },//->4.50
+  { name: "DL_bazar", time: process.env.DL_bazar || "3.00"},//->3.00 
+  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "4.50" },//->4.50
 
-  { name: "Faridabad", time: "6.00" },//-6.00
-  { name: "Gajiyabad", time: "9.00" },//-9.00 
-  { name: "Gali", time: "11.30" },//-E.11.30
-  { name: "Disawar", time: "5.00" },//-5.00
+  { name: "Faridabad", time: process.env.Faridabad || "6.00"},//-6.00
+  { name: "Gajiyabad", time: process.env.Gajiyabad || "9.00"},//-9.00 
+  { name: "Gali", time: process.env.Gali || "11.30"},//-E.11.30
+  { name: "Disawar", time: process.env.Disawar || "5.00"},//-5.00
 ];
 
 
@@ -335,5 +341,6 @@ console.log(timeString,AM)
   console.log("failed")
 } 
 }
-export {setdate,timeString}
+const calledgamesobj = [dlSattaCalled,dlBazarCalled,shreeGaneshCalled,faridabadCalled,gajiyabadCalled,galiCalled,disawarCalled]
+export {setdate,timeString , calledgamesobj}
 setInterval(displayCurrentTime, 1000);

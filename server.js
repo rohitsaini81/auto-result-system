@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,9 +24,23 @@ const dbcon = async (uri) => {
 };
 
 import "./circle.js";
-import { setdate, timeString } from './circle.js';
+import { calledgamesobj, setdate, timeString } from './circle.js';
 
 dbcon(uri);
+
+
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+// Use the URL object to get the directory name
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
+
+app.get('/',(req,res)=>{
+  res.sendFile(__dirname+'/index.html')
+})
 app.get('/api/6', async(req,res)=>{
   try {
     const pro = await Book.find({"date": setdate});
@@ -42,8 +57,8 @@ app.get('/api/7', async(req,res)=>{
     res.status(500).json({ error: error.message });
   }
 })
-app.get('/srv/inf',(req,res)=>{
-  res.send(timeString)
+app.get('/inf',(req,res)=>{
+  res.send(timeString+setdate+"\n"+calledgamesobj)
 })
 
 // Start the server

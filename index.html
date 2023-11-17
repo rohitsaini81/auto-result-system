@@ -1,0 +1,61 @@
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <div>
+        <p>Delhi satta :<span id="_DST">Wait</span></p>
+       <p>Delhi bajar :<span id="_DL">Wait</span></p>
+       <p>Shree Ganesh :<span id="_SG">Wait</span></p>
+       <br>
+       <HR>
+       <p>Desawer :<span id="_DS">Wait</span></p>
+       <p> Faridabad :<span id="_FD">Wait</span></p>
+       <p>Gali :<span id="_GL">Wait</span></p>
+       <p>Gaziabad :<span id="_GZ">Wait</span></p>
+        <HR>
+        </div>
+        <div id="OUT">::</div>
+
+         <script>
+            const dom = async () => {
+    const response = await fetch('https://auto-system.onrender.com/api/6');
+    const data = await response.json();
+    console.log(data);
+    const out = document.getElementById('OUT')
+    const dl = document.getElementById('_DL');
+    const sg = document.getElementById('_SG');
+    const ds = document.getElementById('_DS');
+    const fd = document.getElementById('_FD');
+    const gl = document.getElementById('_GL');
+    const gz = document.getElementById('_GZ');
+    out.innerText += data.map((item) => item.today).join(' ');
+    // console.log(data[0].today)
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].name == 'delhi bazar') {
+            dl.innerText = data[i].today;
+        }
+        if (data[i].name == 'shri ganesh') {
+            sg.innerText = data[i].today;
+        }
+        if (data[i].name == 'disawer') {
+            ds.innerText = data[i].today;
+        }
+        if (data[i].name == 'faridabad') {
+            fd.innerText = data[i].today;
+        }
+        if (data[i].name == 'gali') {
+            gl.innerText = data[i].today;
+        }
+        if (data[i].name == 'gaziyabad') {
+            gz.innerText = data[i].today;
+        }
+    }
+}
+dom();
+setInterval(() => {
+    dom();
+}, 10000);
+         </script>
+    </body>
+</html>
