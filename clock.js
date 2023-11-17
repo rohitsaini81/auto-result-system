@@ -1,11 +1,13 @@
 import axios from "axios";
-
 let nowTime = "";
-let AMPM = "";
+let AMPM = ''
 
 // clock function with 12-hour format
 const clock = (hour, minutes, seconds) => {
   const updateClock = () => {
+    nowTime = `${hour}:${(minutes < 10 ? '0' : '') + minutes}:${(seconds < 10 ? '0' : '') + seconds} ${AMPM}`;
+    // const comtime = new Date()
+    // console.log(nowTime,comtime.getSeconds());
     seconds++;
 
     if (seconds === 60) {
@@ -18,16 +20,16 @@ const clock = (hour, minutes, seconds) => {
       hour++;
     }
 
-    if (hour === 12 && minutes === 0 && seconds === 0) {
-      AMPM = AMPM === 'AM' ? 'PM' : 'AM';
+    if (hour == 12 && minutes == 0 && seconds == 1) {
+      AMPM = AMPM =='AM' ? 'PM':'AM'  
     }
 
-    if (hour === 13) {
+
+    if (hour > 12) {
       hour = 1;
     }
 
-    nowTime = `${hour}:${(minutes < 10 ? '0' : '') + minutes}:${(seconds < 10 ? '0' : '') + seconds} ${AMPM}`;
-    console.log(nowTime);
+
   };
 
   setInterval(updateClock, 1000);
@@ -39,8 +41,8 @@ const timeapi = () => {
     .then((res) => res.data)
     .then((data) => {
       const { hour, minute, seconds } = data;
-      AMPM = hour >= 12 ? 'PM' : 'AM';
-      clock(hour % 12, minute, seconds); // Use hour % 12 to convert 24-hour format to 12-hour format
+      AMPM = hour < 12 ? 'AM' : 'PM';
+      clock(hour%12==0 ? 1 :hour%12, minute,seconds); // Use hour % 12 to convert 24-hour format to 12-hour format
       console.log("time updated");
     })
     .catch((error) => {

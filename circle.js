@@ -5,8 +5,7 @@ import dotenv from 'dotenv';
 import { dbcon, dbclose, uri } from './models/db_server.js';
 import { timeapi, nowTime, AMPM } from './clock.js';
 import readline from 'readline'
-
-
+import { Afunc, Bfunc } from "./hp-apifunc.js";
 
 
 
