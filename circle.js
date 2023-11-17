@@ -232,14 +232,14 @@ const methA = async () => {
   }
 };
 const data = [
-  { name: "DL_Satta", time: "2.30" },//->0.00
+  { name: "DL_Satta", time: "2.02" },//->0.00
 
   { name: "DL_bazar", time: "3.15" },//->3.00 
-  { name: "Shree Ganesh", time: "4.11" },//->4.50
+  { name: "Shree Ganesh", time: "4.50" },//->4.50
 
   { name: "Faridabad", time: "6.00" },//-6.00
   { name: "Gajiyabad", time: "9.00" },//-9.00 
-  { name: "Gali", time: "11.55" },//-E.11.30
+  { name: "Gali", time: "11.30" },//-E.11.30
   { name: "Disawar", time: "5.00" },//-5.00
 ];
 
