@@ -7,7 +7,7 @@ import { timeapi, nowTime, AMPM } from './clock.js';
 import readline from 'readline'
 import FetchResult from "./hp-apifunc.js";
 const result = new FetchResult
-
+let calledgamesobj
 
 
 dotenv.config();
@@ -224,12 +224,12 @@ console.log(setdate)
 const data = [
   { name: "DL_Satta", time:  process.env.DL_Satta || "2.40"},//->0.00
 
-  { name: "DL_bazar", time: process.env.DL_bazar || "3.00"},//->3.00 
-  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "4.50" },//->4.50
+  { name: "DL_bazar", time: process.env.DL_bazar || "15.00"},//->3.00 
+  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.50"},//->4.50
 
-  { name: "Faridabad", time: process.env.Faridabad || "6.00"},//-6.00
-  { name: "Gajiyabad", time: process.env.Gajiyabad || "9.00"},//-9.00 
-  { name: "Gali", time: process.env.Gali || "11.30"},//-E.11.30
+  { name: "Faridabad", time: process.env.Faridabad || "18.00"},//->6.00
+  { name: "Gajiyabad", time: process.env.Gajiyabad || "21.00"},//->9.00
+  { name: "Gali", time: process.env.Gali || "23.00"},//->11.00
   { name: "Disawar", time: process.env.Disawar || "5.00"},//-5.00
 ];
 
@@ -242,6 +242,7 @@ sleep(5000).then(()=>{
   console.log("\n",setdate)
 })
 const now = new Date()
+
   sleep(6000).then(()=>{
   timeString = nowTime;
 })
@@ -260,7 +261,7 @@ var is currenttime so make sure it has correct time okk.....
   try {
     const a = nowTime.split(':');
     const currentTime = `${a[0]}.${a[1]}`;
-    const AM = AMPM.includes('AM');
+    const AM = a[0]>12 ? false : true;
     timeString = nowTime;
     const seconds = a[2].split(' ');
 
@@ -268,20 +269,20 @@ var is currenttime so make sure it has correct time okk.....
 if (process.env.DEV) {
   try {
     readline.cursorTo(process.stdout, 0);
-    process.stdout.write(timeString +" "+  AM);
+    process.stdout.write(currentTime +" "+  AM);
   
   } catch (error) {
     console.log(error)
   }
 } else {
-console.log(timeString,AM)
+// console.log(timeString,AM)
     
   }
 
- 
+  
   const matchingNames = data.filter((item) => item.time === currentTime);
-
-  if (AM && matchingNames.length > 0) {
+  
+  if (!AM && matchingNames.length > 0) {
     matchingNames.forEach((item) => {
       switch (item.name) {
         case "DL_Satta":
@@ -289,46 +290,47 @@ console.log(timeString,AM)
             dlSattaCalled = true;
           }
           break;
-        case "DL_bazar":
-          if (DL_bazar()) {
-            dlBazarCalled = true;
+          case "DL_bazar":
+            if (DL_bazar()) {
+              dlBazarCalled = true;
           }
           break;
-        case "Shree Ganesh":
-          if (Shree_Ganesh()) {
-            shreeGaneshCalled = true;
-          }
-          break;
-        case "Faridabad":
+          case "Shree Ganesh":
+            if (Shree_Ganesh()) {
+              shreeGaneshCalled = true;
+            }
+            break;
+            case "Faridabad":
           if (Faridabad()) {
             faridabadCalled = true;
           }
           break;
-        case "Gajiyabad":
-          if (Gajiyabad()) {
-            gajiyabadCalled = true;
-          }
-          break;
-        case "Gali":
-          if (Gali()) {
-            galiCalled = true;
-          }
-          break;
-      }
-    });
-  } else if (matchingNames.length > 0) {
-    matchingNames.forEach((item) => {
-      if (item.name === "Disawar") {
-        if (Disawar()) {
-          disawarCalled = true;
+          case "Gajiyabad":
+            if (Gajiyabad()) {
+              gajiyabadCalled = true;
+            }
+            break;
+            case "Gali":
+              if (Gali()) {
+                galiCalled = true;
+              }
+              break;
+            }
+          });
+        } else if (matchingNames.length > 0) {
+          matchingNames.forEach((item) => {
+            if (item.name === "Disawar") {
+              if (Disawar()) {
+                disawarCalled = true;
+              }
+            }
+          });
         }
-      }
-    });
-  }
-} catch (error) {
-  console.log("failed")
-} 
-}
-const calledgamesobj = [dlSattaCalled,dlBazarCalled,shreeGaneshCalled,faridabadCalled,gajiyabadCalled,galiCalled,disawarCalled]
+        calledgamesobj = [dlSattaCalled,dlBazarCalled,shreeGaneshCalled,faridabadCalled,gajiyabadCalled,galiCalled,disawarCalled]
+      } catch (error) {
+        console.log("failed")
+      } 
+    }
+
 export {setdate,timeString , calledgamesobj}
 setInterval(displayCurrentTime, 1000);

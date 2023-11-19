@@ -19,11 +19,6 @@ const clock = (hour, minutes, seconds) => {
       hour++;
     }
 
-    if (hour === 12 && minutes === 0 && seconds === 1) {
-      AMPM = AMPM =='AM' ? 'PM':'AM'  
-    }
-
-
     if (hour === 24) {
       hour = 1;
     }
