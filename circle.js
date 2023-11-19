@@ -6,6 +6,7 @@ import { dbcon, dbclose, uri } from './models/db_server.js';
 import { timeapi, nowTime, AMPM } from './clock.js';
 import readline from 'readline'
 import FetchResult from "./hp-apifunc.js";
+const result = new FetchResult
 
 
 
@@ -71,7 +72,6 @@ const DL_Satta = async () => {
   const obj = {name:"DL_Satta",today:"00",yesterday:"-0",date:setdate}
   createdata(obj);
   dlSattaCalled = true;
-  sleep(60000)
   disawarCalled = false;
   return true;
 };
@@ -82,10 +82,10 @@ const DL_bazar = async() => {
   }
   console.log("DL_bazar");
   let obj = {}
-  await methA().then((res) => {const obj ={
-    name:res[1][0].name,
-    today:res[1][0].today,
-    yesterday:res[1][0].yesterday,
+  await result.Bfunc().then((res) => {const obj ={
+    name:res[0].name,
+    today:res[0].today,
+    yesterday:res[0].yesterday,
     date:setdate
   }
   // console.log(obj)
@@ -103,10 +103,10 @@ const Shree_Ganesh = () => {
   }
   console.log("Shree_Ganesh");
   shreeGaneshCalled = true;
-  methA().then((res) => { const obj ={
-    name:res[1][1].name,
-    today:res[1][1].today,
-    yesterday:res[1][1].yesterday,
+  result.methB().then((res) => { const obj ={
+    name:res[1].name,
+    today:res[1].today,
+    yesterday:res[1].yesterday,
     date:setdate
   }
   // console.log(obj)
@@ -123,11 +123,11 @@ const Faridabad = () => {
   }
   console.log("Faridabad");
   faridabadCalled = true;
-  methA().then((res) => {
+  result.Afunc().then((res) => {
     const obj = {
       "name": "faridabad",
-      "today": res[0][0].faridabad,
-      "yesterday": res[0][1].faridabad,
+      "today": res[1].faridabad,
+      "yesterday": res[0].faridabad,
       "date": setdate
     }
     // console.log(obj)
@@ -147,18 +147,18 @@ const Gajiyabad = () => {
   }
   console.log("Gajiyabad");
   gajiyabadCalled = true;
-  methA().then((res) => {
+  result.Afunc().then((res) => {
     const obj = {
       "name": "gaziyabad",
-      "today": res[0][0].gaziabad,
-      "yesterday": res[0][1].gaziabad,
+      "today": res[0].gaziabad,
+      "yesterday": res[1].gaziabad,
       "date": setdate
     }
     // console.log(obj)
     createdata(obj)
   }).catch((e)=>console.log(e));
 
-  sleep(60000)
+
   faridabadCalled = false;
   return true;
 };
@@ -169,11 +169,11 @@ const Gali = () => {
   }
   console.log("Gali");
   galiCalled = true;
-  methA().then((res) => {
+  result.Afunc().then((res) => {
     const obj = {
       "name": "gali",
-      "today": res[0][0].gali,
-      "yesterday": res[0][1].gali,
+      "today": res[0].gali,
+      "yesterday": res[1].gali,
       "date": setdate
     }
     // console.log(obj)
@@ -192,15 +192,15 @@ const Disawar = () => {
   console.log("\n Disawar");
   today = new Date();
     setdate = today.toLocaleDateString();
-  methA().then((res) => {
+    result.Afunc().then((res) => {
     today = new Date();
     setdate = today.toLocaleDateString();
 console.log(setdate)
     const obj = {
       "name": "disawar",
-      "today": res[0][1].disawer,
+      "today": res[1].disawer,
       "date": setdate,
-      "yesterday": res[0][0].disawer
+      "yesterday": res[0].disawer
     }
     console.log(obj)
     try {
@@ -217,24 +217,8 @@ console.log(setdate)
   return true;
 };
 
-const methA = async () => {
-  let arr = [];
-  const url = "https://hp-api-o04w.onrender.com/";
-  try {
-    const response1 = await axios.get(url+"A");
-    const dataA = response1.data;
-    console.log(response1.status, " ", response1.statusText);
-    // 
-    const response2 = await axios.get(url+"B");
-    const dataB = response2.data;
-    console.log(response2.status, " ", response2.statusText);
-    arr.push(dataA);
-    arr.push(dataB);
-    return arr;
-  } catch (e) {
-    return("error");
-  }
-};
+
+
 
 
 const data = [
@@ -268,7 +252,11 @@ let timeString = now.toLocaleTimeString();
 // main function for display time and call function
 function displayCurrentTime() 
 {
-  // console.log(nowTime, AMPM)
+/*
+    const hours =hour%12==0 ? 12 :hour%12
+first export hour from clock then manage it in nowtime but main using
+var is currenttime so make sure it has correct time okk.....
+*/
   try {
     const a = nowTime.split(':');
     const currentTime = `${a[0]}.${a[1]}`;
@@ -293,7 +281,7 @@ console.log(timeString,AM)
  
   const matchingNames = data.filter((item) => item.time === currentTime);
 
-  if (!AM && matchingNames.length > 0) {
+  if (AM && matchingNames.length > 0) {
     matchingNames.forEach((item) => {
       switch (item.name) {
         case "DL_Satta":
