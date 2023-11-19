@@ -150,8 +150,8 @@ const Gajiyabad = () => {
   result.Afunc().then((res) => {
     const obj = {
       "name": "gaziyabad",
-      "today": res[0].gaziabad,
-      "yesterday": res[1].gaziabad,
+      "today": res[1].gaziabad,
+      "yesterday": res[0].gaziabad,
       "date": setdate
     }
     // console.log(obj)
@@ -172,8 +172,8 @@ const Gali = () => {
   result.Afunc().then((res) => {
     const obj = {
       "name": "gali",
-      "today": res[0].gali,
-      "yesterday": res[1].gali,
+      "today": res[1].gali,
+      "yesterday": res[0].gali,
       "date": setdate
     }
     // console.log(obj)
