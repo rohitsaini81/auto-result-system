@@ -44,6 +44,6 @@ const timeapi = () => {
     });
 };
 
-timeapi();
+// timeapi();
 
 export { timeapi, nowTime, AMPM };
