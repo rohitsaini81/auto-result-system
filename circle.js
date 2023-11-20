@@ -1,5 +1,5 @@
 import axios from 'axios';
-import mongoose, { set } from 'mongoose';
+import mongoose from 'mongoose';
 import Book from './models/db.js';
 import dotenv from 'dotenv';
 import { dbcon, dbclose, uri } from './models/db_server.js';
@@ -42,8 +42,6 @@ const createdata = async (data) => {
   await writedata(data);
   // await dbclose();
 }
-const putdata = async (id, data) => { }
-
 
 
 const sleep = (ms) => {
@@ -114,7 +112,6 @@ const Shree_Ganesh = () => {
     // console.log(obj)
     createdata(obj)
   }).catch((e) => console.log(e));
-  sleep(60000)
   dlBazarCalled = false;
   return true;
 };
@@ -137,8 +134,6 @@ const Faridabad = () => {
 
   }).catch((e) => console.log(e));
 
-
-  sleep(60000)
   shreeGaneshCalled = false;
   return true;
 };
@@ -159,8 +154,6 @@ const Gajiyabad = () => {
     // console.log(obj)
     createdata(obj)
   }).catch((e) => console.log(e));
-
-
   faridabadCalled = false;
   return true;
 };
@@ -170,7 +163,6 @@ const Gali = () => {
     return false;
   }
   console.log("Gali");
-  galiCalled = true;
   result.Afunc().then((res) => {
     const obj = {
       "name": "gali",
@@ -180,9 +172,10 @@ const Gali = () => {
     }
     // console.log(obj)
     createdata(obj)
+  galiCalled = true;
+
   }).catch((e) => console.log(e));
 
-  sleep(60000)
   gajiyabadCalled = false;
   return true;
 };
@@ -214,7 +207,6 @@ const Disawar = () => {
     disawarCalled = true;
   })
     .catch((e) => console.log("disawer error 2"));
-  sleep(60000)
   galiCalled = false;
   return true;
 };
@@ -224,10 +216,10 @@ const Disawar = () => {
 
 
 const data = [
-  { name: "DL_Satta", time: process.env.DL_Satta || "2.40" },//->0.00
+  { name: "DL_Satta", time: process.env.DL_Satta || "1.00" },//->0.00
 
-  { name: "DL_bazar", time: process.env.DL_bazar || "15.16" },//->3.00 
-  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.50" },//->4.50
+  { name: "DL_bazar", time: process.env.DL_bazar || "15.00" },//->3.00 
+  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.30" },//->4.50
 
   { name: "Faridabad", time: process.env.Faridabad || "18.00" },//->6.00
   { name: "Gajiyabad", time: process.env.Gajiyabad || "21.00" },//->9.00
@@ -265,12 +257,13 @@ function displayCurrentTime() {
     var AM = a[0] > 12 ? false : true;
     timeString = nowTime;
     const seconds = a[2].split(' ');
+    // AMPM='ffffuck'
 
 
     if (process.env.DEV) {
       try {
         readline.cursorTo(process.stdout, 0);
-        process.stdout.write(currentTime + " "+seconds+ " " + AM);
+        process.stdout.write(currentTime + " "+seconds[0]+ " " + AM);
 
       } catch (error) {
         console.log(error)
@@ -281,7 +274,7 @@ function displayCurrentTime() {
     }
 
 
-    const matchingNames = data.filter((item) => item.time === currentTime);
+    const matchingNames = data.filter((item) => item.time == currentTime);
 
     if (matchingNames.length > 0) {
       matchingNames.forEach((item) => {
@@ -329,7 +322,7 @@ function displayCurrentTime() {
     setdate = today.toLocaleDateString();
     calledgamesobj = [dlSattaCalled, dlBazarCalled, shreeGaneshCalled, faridabadCalled, gajiyabadCalled, galiCalled, disawarCalled]
   } catch (error) {
-    console.log("failed2",error)
+    console.log("failed2",error.message)
   }
 }
 
