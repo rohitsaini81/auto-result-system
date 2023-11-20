@@ -1,6 +1,6 @@
 import axios from "axios";
 let nowTime = "";
-let AMPM = ''
+var AMPM = ''
 
 // clock function with 12-hour format
 const clock = (hour, minutes, seconds) => {
@@ -23,6 +23,7 @@ const clock = (hour, minutes, seconds) => {
       hour = 1;
     }
 
+    AMPM = hour>12 ? 'AM':'PM'
 
   };
 

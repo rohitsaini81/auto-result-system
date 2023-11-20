@@ -12,8 +12,8 @@ let calledgamesobj
 
 dotenv.config();
 console.log(2)
-var today = new Date();
-var setdate = today.toLocaleDateString();
+let today = new Date();
+let setdate = today.toLocaleDateString();
 const readdata = async () => {
   try {
     const pro = await Book.find();
@@ -243,7 +243,7 @@ timeapi()
 sleep(5000).then(() => {
   console.log("\n", setdate)
 })
-const now = new Date()
+var now = new Date()
 
 sleep(6000).then(() => {
   timeString = nowTime;
@@ -262,8 +262,7 @@ function displayCurrentTime() {
   try {
     const a = nowTime.split(':');
     const currentTime = `${a[0]}.${a[1]}`;
-    const AM = a[0] > 12 ? false : true;
-    AMPM = AM ? 'AM':'PM'
+    var AM = a[0] > 12 ? false : true;
     timeString = nowTime;
     const seconds = a[2].split(' ');
 
@@ -271,7 +270,7 @@ function displayCurrentTime() {
     if (process.env.DEV) {
       try {
         readline.cursorTo(process.stdout, 0);
-        process.stdout.write(currentTime + " " + AM);
+        process.stdout.write(currentTime + " "+seconds+ " " + AM);
 
       } catch (error) {
         console.log(error)
@@ -317,22 +316,20 @@ function displayCurrentTime() {
               galiCalled = true;
             }
             break;
+          case "Disawar":
+            if (Disawar()) {
+              disawarCalled = true;
+            }
+            break;
         }
       });
-    } else if (matchingNames.length > 0) {
-      matchingNames.forEach((item) => {
-        if (item.name === "Disawar") {
-          if (Disawar()) {
-            disawarCalled = true;
-          }
-        }
-      });
-    }
+    } 
+    
     today = new Date();
     setdate = today.toLocaleDateString();
     calledgamesobj = [dlSattaCalled, dlBazarCalled, shreeGaneshCalled, faridabadCalled, gajiyabadCalled, galiCalled, disawarCalled]
   } catch (error) {
-    console.log("failed")
+    console.log("failed2",error)
   }
 }
 
