@@ -104,7 +104,7 @@ const Shree_Ganesh = () => {
   }
   console.log("Shree_Ganesh");
   shreeGaneshCalled = true;
-  result.methB().then((res) => {
+  result.Bfunc().then((res) => {
     const obj = {
       name: res[1].name,
       today: res[1].today,
@@ -226,7 +226,7 @@ const Disawar = () => {
 const data = [
   { name: "DL_Satta", time: process.env.DL_Satta || "2.40" },//->0.00
 
-  { name: "DL_bazar", time: process.env.DL_bazar || "15.00" },//->3.00 
+  { name: "DL_bazar", time: process.env.DL_bazar || "15.16" },//->3.00 
   { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.50" },//->4.50
 
   { name: "Faridabad", time: process.env.Faridabad || "18.00" },//->6.00
