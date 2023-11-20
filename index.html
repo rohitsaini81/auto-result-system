@@ -9,7 +9,7 @@
        <p>Shree Ganesh :<span id="_SG">Wait</span></p>
        <br>
        <HR>
-       <p>Desawer :<span id="_DS">Wait</span></p>
+       <p>Disawar :<span id="_DS">Wait</span></p>
        <p> Faridabad :<span id="_FD">Wait</span></p>
        <p>Gali :<span id="_GL">Wait</span></p>
        <p>Gaziabad :<span id="_GZ">Wait</span></p>
@@ -19,7 +19,7 @@
 
          <script>
             const dom = async () => {
-    const response = await fetch('https://auto-system.onrender.com/api/6');
+    const response = await fetch('/api/6');
     const data = await response.json();
     console.log(data);
     const out = document.getElementById('OUT')
@@ -38,7 +38,7 @@
         if (data[i].name == 'shri ganesh') {
             sg.innerText = data[i].today;
         }
-        if (data[i].name == 'disawer') {
+        if (data[i].name == 'disawar') {
             ds.innerText = data[i].today;
         }
         if (data[i].name == 'faridabad') {

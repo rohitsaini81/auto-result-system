@@ -28,19 +28,16 @@ import { calledgamesobj, setdate, timeString } from './circle.js';
 
 dbcon(uri);
 
-
+// {
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
 // Use the URL object to get the directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-
-
 app.get('/',(req,res)=>{
   res.sendFile(__dirname+'/index.html')
 })
+// }
 app.get('/api/6', async(req,res)=>{
   try {
     const pro = await Book.find({"date": setdate});
