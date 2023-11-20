@@ -218,8 +218,8 @@ const Disawar = () => {
 const data = [
   { name: "DL_Satta", time: process.env.DL_Satta || "1.00" },//->0.00
 
-  { name: "DL_bazar", time: process.env.DL_bazar || "15.00" },//->3.00 
-  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.30" },//->4.50
+  { name: "DL_bazar", time: process.env.DL_bazar || "15.16" },//->3.15 
+  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.51" },//->4.50
 
   { name: "Faridabad", time: process.env.Faridabad || "18.00" },//->6.00
   { name: "Gajiyabad", time: process.env.Gajiyabad || "21.00" },//->9.00
