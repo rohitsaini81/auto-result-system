@@ -19,7 +19,7 @@ const clock = (hour, minutes, seconds) => {
       hour++;
     }
 
-    if (hour === 24) {
+    if (hour === 25) {
       hour = 1;
     }
 

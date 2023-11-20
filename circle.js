@@ -20,7 +20,7 @@ const readdata = async () => {
     console.log("readdata")
     console.log(pro)
   } catch (error) {
-    console.log(500, "errorv ", error.message );
+    console.log(500, "errorv ", error.message);
   }
 };
 const readdatabase = async () => {
@@ -28,21 +28,21 @@ const readdatabase = async () => {
   await readdata();
   await dbclose();
 };
-const writedata = async (data)=>{
-  try{
+const writedata = async (data) => {
+  try {
     const pro = await Book.create(data);
     console.log(pro)
   }
-  catch(error){
-    console.log(500, "errorv ", error.message );
+  catch (error) {
+    console.log(500, "errorv ", error.message);
+  }
 }
-}
-const createdata= async (data)=>{
+const createdata = async (data) => {
   await dbcon(uri);
   await writedata(data);
   // await dbclose();
 }
-const putdata = async (id,data)=>{}
+const putdata = async (id, data) => { }
 
 
 
@@ -63,35 +63,36 @@ let disawarCalled = false;
 // Dl_Satta ------------------>
 const DL_Satta = async () => {
   today = new Date();
-    setdate = today.toLocaleDateString();
+  setdate = today.toLocaleDateString();
   if (dlSattaCalled) {
     return false;
   }
-  
+
   console.log("DL_Satta");
-  const obj = {name:"DL_Satta",today:"00",yesterday:"-0",date:setdate}
+  const obj = { name: "DL_Satta", today: "00", yesterday: "-0", date: setdate }
   createdata(obj);
   dlSattaCalled = true;
   disawarCalled = false;
   return true;
 };
 // DL_bazar ------------------>
-const DL_bazar = async() => {
+const DL_bazar = async () => {
   if (dlBazarCalled) {
     return false;
   }
   console.log("DL_bazar");
   let obj = {}
-  await result.Bfunc().then((res) => {const obj ={
-    name:res[0].name,
-    today:res[0].today,
-    yesterday:res[0].yesterday,
-    date:setdate
-  }
-  // console.log(obj)
-  createdata(obj)
-  dlBazarCalled = true;
-}).catch((e)=>{console.log(e)});
+  await result.Bfunc().then((res) => {
+    const obj = {
+      name: res[0].name,
+      today: res[0].today,
+      yesterday: res[0].yesterday,
+      date: setdate
+    }
+    // console.log(obj)
+    createdata(obj)
+    dlBazarCalled = true;
+  }).catch((e) => { console.log(e) });
 
   dlSattaCalled = false;
   return true;
@@ -103,15 +104,16 @@ const Shree_Ganesh = () => {
   }
   console.log("Shree_Ganesh");
   shreeGaneshCalled = true;
-  result.methB().then((res) => { const obj ={
-    name:res[1].name,
-    today:res[1].today,
-    yesterday:res[1].yesterday,
-    date:setdate
-  }
-  // console.log(obj)
-  createdata(obj)
-}).catch((e)=>console.log(e));
+  result.methB().then((res) => {
+    const obj = {
+      name: res[1].name,
+      today: res[1].today,
+      yesterday: res[1].yesterday,
+      date: setdate
+    }
+    // console.log(obj)
+    createdata(obj)
+  }).catch((e) => console.log(e));
   sleep(60000)
   dlBazarCalled = false;
   return true;
@@ -132,8 +134,8 @@ const Faridabad = () => {
     }
     // console.log(obj)
     createdata(obj)
-    
-  }).catch((e)=>console.log(e));
+
+  }).catch((e) => console.log(e));
 
 
   sleep(60000)
@@ -156,7 +158,7 @@ const Gajiyabad = () => {
     }
     // console.log(obj)
     createdata(obj)
-  }).catch((e)=>console.log(e));
+  }).catch((e) => console.log(e));
 
 
   faridabadCalled = false;
@@ -178,7 +180,7 @@ const Gali = () => {
     }
     // console.log(obj)
     createdata(obj)
-    }).catch((e)=>console.log(e));
+  }).catch((e) => console.log(e));
 
   sleep(60000)
   gajiyabadCalled = false;
@@ -191,11 +193,11 @@ const Disawar = () => {
   }
   console.log("\n Disawar");
   today = new Date();
-    setdate = today.toLocaleDateString();
-    result.Afunc().then((res) => {
+  setdate = today.toLocaleDateString();
+  result.Afunc().then((res) => {
     today = new Date();
     setdate = today.toLocaleDateString();
-console.log(setdate)
+    console.log(setdate)
     const obj = {
       "name": "disawar",
       "today": res[1].disawer,
@@ -205,13 +207,13 @@ console.log(setdate)
     console.log(obj)
     try {
       createdata(obj)
-      
+
     } catch (error) {
-      console.log("desiwer result error")   
+      console.log("desiwer result error")
     }
     disawarCalled = true;
   })
-  .catch((e)=>console.log("disawer error 2"));
+    .catch((e) => console.log("disawer error 2"));
   sleep(60000)
   galiCalled = false;
   return true;
@@ -222,15 +224,15 @@ console.log(setdate)
 
 
 const data = [
-  { name: "DL_Satta", time:  process.env.DL_Satta || "2.40"},//->0.00
+  { name: "DL_Satta", time: process.env.DL_Satta || "2.40" },//->0.00
 
-  { name: "DL_bazar", time: process.env.DL_bazar || "15.00"},//->3.00 
-  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.50"},//->4.50
+  { name: "DL_bazar", time: process.env.DL_bazar || "15.00" },//->3.00 
+  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.50" },//->4.50
 
-  { name: "Faridabad", time: process.env.Faridabad || "18.00"},//->6.00
-  { name: "Gajiyabad", time: process.env.Gajiyabad || "21.00"},//->9.00
-  { name: "Gali", time: process.env.Gali || "23.00"},//->11.00
-  { name: "Disawar", time: process.env.Disawar || "5.00"},//-5.00
+  { name: "Faridabad", time: process.env.Faridabad || "18.00" },//->6.00
+  { name: "Gajiyabad", time: process.env.Gajiyabad || "21.00" },//->9.00
+  { name: "Gali", time: process.env.Gali || "23.00" },//->11.00
+  { name: "Disawar", time: process.env.Disawar || "5.00" },//-5.00
 ];
 
 
@@ -238,12 +240,12 @@ const data = [
 // readdatabase();
 
 timeapi()
-sleep(5000).then(()=>{
-  console.log("\n",setdate)
+sleep(5000).then(() => {
+  console.log("\n", setdate)
 })
 const now = new Date()
 
-  sleep(6000).then(()=>{
+sleep(6000).then(() => {
   timeString = nowTime;
 })
 let timeString = now.toLocaleTimeString();
@@ -251,86 +253,88 @@ let timeString = now.toLocaleTimeString();
 
 
 // main function for display time and call function
-function displayCurrentTime() 
-{
-/*
-    const hours =hour%12==0 ? 12 :hour%12
-first export hour from clock then manage it in nowtime but main using
-var is currenttime so make sure it has correct time okk.....
-*/
+function displayCurrentTime() {
+  /*
+      const hours =hour%12==0 ? 12 :hour%12
+  first export hour from clock then manage it in nowtime but main using
+  var is currenttime so make sure it has correct time okk.....
+  */
   try {
     const a = nowTime.split(':');
     const currentTime = `${a[0]}.${a[1]}`;
-    const AM = a[0]>12 ? false : true;
+    const AM = a[0] > 12 ? false : true;
+    AMPM = AM ? 'AM':'PM'
     timeString = nowTime;
     const seconds = a[2].split(' ');
 
 
-if (process.env.DEV) {
-  try {
-    readline.cursorTo(process.stdout, 0);
-    process.stdout.write(currentTime +" "+  AM);
-  
-  } catch (error) {
-    console.log(error)
-  }
-} else {
-// console.log(timeString,AM)
-    
-  }
+    if (process.env.DEV) {
+      try {
+        readline.cursorTo(process.stdout, 0);
+        process.stdout.write(currentTime + " " + AM);
 
-  
-  const matchingNames = data.filter((item) => item.time === currentTime);
-  
-  if (!AM && matchingNames.length > 0) {
-    matchingNames.forEach((item) => {
-      switch (item.name) {
-        case "DL_Satta":
-          if (DL_Satta()) {
-            dlSattaCalled = true;
-          }
-          break;
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      // console.log(timeString,AM)
+
+    }
+
+
+    const matchingNames = data.filter((item) => item.time === currentTime);
+
+    if (matchingNames.length > 0) {
+      matchingNames.forEach((item) => {
+        switch (item.name) {
+          case "DL_Satta":
+            if (DL_Satta()) {
+              dlSattaCalled = true;
+            }
+            break;
           case "DL_bazar":
             if (DL_bazar()) {
               dlBazarCalled = true;
-          }
-          break;
+            }
+            break;
           case "Shree Ganesh":
             if (Shree_Ganesh()) {
               shreeGaneshCalled = true;
             }
             break;
-            case "Faridabad":
-          if (Faridabad()) {
-            faridabadCalled = true;
-          }
-          break;
+          case "Faridabad":
+            if (Faridabad()) {
+              faridabadCalled = true;
+            }
+            break;
           case "Gajiyabad":
             if (Gajiyabad()) {
               gajiyabadCalled = true;
             }
             break;
-            case "Gali":
-              if (Gali()) {
-                galiCalled = true;
-              }
-              break;
+          case "Gali":
+            if (Gali()) {
+              galiCalled = true;
             }
-          });
-        } else if (matchingNames.length > 0) {
-          matchingNames.forEach((item) => {
-            if (item.name === "Disawar") {
-              if (Disawar()) {
-                disawarCalled = true;
-              }
-            }
-          });
+            break;
         }
-        calledgamesobj = [dlSattaCalled,dlBazarCalled,shreeGaneshCalled,faridabadCalled,gajiyabadCalled,galiCalled,disawarCalled]
-      } catch (error) {
-        console.log("failed")
-      } 
+      });
+    } else if (matchingNames.length > 0) {
+      matchingNames.forEach((item) => {
+        if (item.name === "Disawar") {
+          if (Disawar()) {
+            disawarCalled = true;
+          }
+        }
+      });
     }
+    today = new Date();
+    setdate = today.toLocaleDateString();
+    calledgamesobj = [dlSattaCalled, dlBazarCalled, shreeGaneshCalled, faridabadCalled, gajiyabadCalled, galiCalled, disawarCalled]
+  } catch (error) {
+    console.log("failed")
+  }
+}
 
-export {setdate,timeString , calledgamesobj}
+export { setdate, timeString, calledgamesobj }
 setInterval(displayCurrentTime, 1000);
