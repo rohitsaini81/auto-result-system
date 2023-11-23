@@ -38,6 +38,7 @@ const timeapi = () => {
       const { hour, minute, seconds } = data;
       AMPM = hour < 12 ? 'AM' : 'PM';
       clock(hour, minute,seconds); // Use hour % 12 to convert 24-hour format to 12-hour format
+      console.clear()
       console.log("time updated");
     })
     .catch((error) => {

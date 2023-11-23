@@ -68,8 +68,8 @@ export default class FetchResult {
         });
       });
   
-      console.log(result[2]);
-      console.log(result[3]);
+      // console.log(result[2]);
+      // console.log(result[3]);
   
       const sen = [result[2], result[3]];
       return(sen);

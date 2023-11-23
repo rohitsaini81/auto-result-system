@@ -6,13 +6,16 @@ import { dbcon, dbclose, uri } from './models/db_server.js';
 import { timeapi, nowTime, AMPM } from './clock.js';
 import readline from 'readline'
 import FetchResult from "./hp-apifunc.js";
+import { gettime } from './servertime.js'
 const result = new FetchResult
 let calledgamesobj
 
-
+// const a = await gettime()
 dotenv.config();
 console.log(2)
 let today = new Date();
+// console.log(a.dateTime)
+console.log(today.toLocaleString())
 let setdate = today.toLocaleDateString();
 const readdata = async () => {
   try {
@@ -96,25 +99,39 @@ const DL_bazar = async () => {
   return true;
 };
 // Shree_Ganesh ------------------>
-const Shree_Ganesh = () => {
+const Shree_Ganesh = async () => {
   if (shreeGaneshCalled) {
     return false;
   }
   console.log("Shree_Ganesh");
-  shreeGaneshCalled = true;
-  result.Bfunc().then((res) => {
-    const obj = {
-      name: res[1].name,
-      today: res[1].today,
-      yesterday: res[1].yesterday,
-      date: setdate
+
+  try {
+    const res = await result.Bfunc();
+    const L = res[1].today;
+    
+    if (L.length <= 2) {
+      console.log(L,'Processing...',L.length);
+      const obj = {
+        "name": res[1].name,
+        "today": res[1].today,
+        "yesterday": res[1].yesterday,
+        "date": setdate
+      };
+      createdata(obj);
+      shreeGaneshCalled = true;
+      dlBazarCalled = false;
+      return true;
+    } else {
+      // Uncomment the following block if you want a delay before the recursive call
+      await sleep(10000);
+      return Shree_Ganesh();
     }
-    // console.log(obj)
-    createdata(obj)
-  }).catch((e) => console.log(e));
-  dlBazarCalled = false;
-  return true;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
 };
+
 // ---------------------------->
 const Faridabad = () => {
   if (faridabadCalled) {
@@ -172,7 +189,7 @@ const Gali = () => {
     }
     // console.log(obj)
     createdata(obj)
-  galiCalled = true;
+    galiCalled = true;
 
   }).catch((e) => console.log(e));
 
@@ -180,16 +197,18 @@ const Gali = () => {
   return true;
 };
 // Disawer ----------->
-const Disawar = () => {
+const Disawar = async () => {
+
   if (disawarCalled) {
     return false;
   }
   console.log("\n Disawar");
-  today = new Date();
-  setdate = today.toLocaleDateString();
+  console.log(timeString)
+  today = await gettime()
+  setdate = today.date;
+  await console.log(setdate)
   result.Afunc().then((res) => {
-    today = new Date();
-    setdate = today.toLocaleDateString();
+
     console.log(setdate)
     const obj = {
       "name": "disawar",
@@ -263,7 +282,7 @@ function displayCurrentTime() {
     if (process.env.DEV) {
       try {
         readline.cursorTo(process.stdout, 0);
-        process.stdout.write(currentTime + " "+seconds[0]+ " " + AM);
+        process.stdout.write(currentTime + " " + seconds[0] + " " + AM);
 
       } catch (error) {
         console.log(error)
@@ -316,13 +335,13 @@ function displayCurrentTime() {
             break;
         }
       });
-    } 
-    
+    }
+
     today = new Date();
     setdate = today.toLocaleDateString();
     calledgamesobj = [dlSattaCalled, dlBazarCalled, shreeGaneshCalled, faridabadCalled, gajiyabadCalled, galiCalled, disawarCalled]
   } catch (error) {
-    console.log("failed2",error.message)
+    console.log("failed2", error.message)
   }
 }
 
