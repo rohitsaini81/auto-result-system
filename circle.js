@@ -206,16 +206,17 @@ const Disawar = async () => {
   console.log(timeString)
   today = await gettime()
   setdate = today.date;
+ const mydate = today.date;
   await console.log(setdate)
   result.Afunc().then((res) => {
 
-    console.log(setdate)
     const obj = {
       "name": "disawar",
       "today": res[1].disawer,
-      "date": setdate,
+      "date": mydate,
       "yesterday": res[0].disawer
     }
+    console.log(obj)
     console.log(obj)
     try {
       createdata(obj)

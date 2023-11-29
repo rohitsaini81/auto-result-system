@@ -54,6 +54,12 @@ app.get('/api/7', async(req,res)=>{
     res.status(500).json({ error: error.message });
   }
 })
+app.get('/api/8', async(req,res)=>{
+  res.sendFile(__dirname+'/domcdn.js')
+ })
+app.get('/api/9', async(req,res)=>{
+ res.sendFile(__dirname+'/Tokyo.mp4')
+})
 app.get('/inf',(req,res)=>{
   res.send(timeString+setdate+"\n"+calledgamesobj)
 })
