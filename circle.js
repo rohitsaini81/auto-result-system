@@ -90,7 +90,7 @@ const DL_bazar = async () => {
       yesterday: res[0].yesterday,
       date: setdate
     }
-    // console.log(obj)
+    console.log(obj)
     createdata(obj)
     dlBazarCalled = true;
   }).catch((e) => { console.log(e) });
@@ -205,9 +205,10 @@ const Disawar = async () => {
   console.log("\n Disawar");
   console.log(timeString)
   today = await gettime()
-  setdate = today.date;
- const mydate = today.date;
-  await console.log(setdate)
+  const custom =  await today.date.split('/');
+  const mydate = custom[0] + '/' + (custom[1].length>1?custom[1][1]:custom[1]) + '/' + custom[2];
+   setdate = mydate
+  console.log(mydate)
   result.Afunc().then((res) => {
 
     const obj = {
@@ -216,7 +217,6 @@ const Disawar = async () => {
       "date": mydate,
       "yesterday": res[0].disawer
     }
-    console.log(obj)
     console.log(obj)
     try {
       createdata(obj)
