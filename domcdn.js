@@ -36,3 +36,6 @@ const dom = async () => {
       }
   }
   dom();
+setInterval(() => {
+    dom();
+}, 10000);
