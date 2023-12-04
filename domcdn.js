@@ -21,11 +21,12 @@ const dom = async () => {
     console.log(data);
 
     for (let i = 0; i < data.length; i++) {
-        if (data[i].name == 'delhi bazar' && data[i].today.length < 5 && data[i].today.length != 0) {
+        console.log("rohitsaini",data[i].today.length)
+        if (data[i].name == 'delhi bazar' && (data[i].today.length() < 5) && data[i].today.length != 0) {
             dl.innerText = data[i].today;
             o_dl.innerText = data[i].yesterday;
         }
-        if (data[i].name == 'shri ganesh' && data[i].today.length > 5 && data[i].today.length != 0) {
+        if (data[i].name == 'shri ganesh' && data[i].today.length < 5 && data[i].today.length != 0) {
             sg.innerText = data[i].today;
             o_sg.innerText = data[i].yesterday;
         }
