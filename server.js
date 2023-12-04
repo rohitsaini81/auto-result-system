@@ -39,8 +39,9 @@ app.get('/',(req,res)=>{
 })
 // }
 app.get('/api/6', async(req,res)=>{
+  const date = "12"+setdate[2]+(setdate[3]<10?"0"+setdate[3]:setdate[3])+"/2023"
   try {
-    const pro = await Book.find({"date": setdate});
+    const pro = await Book.find({"date": date});
     res.status(200).send(pro)
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -61,7 +62,8 @@ app.get('/api/9', async(req,res)=>{
  res.sendFile(__dirname+'/Tokyo.mp4')
 })
 app.get('/inf',(req,res)=>{
-  res.send(timeString+setdate+"\n"+calledgamesobj)
+  const date = "12"+setdate[2]+(setdate[3]<10?"0"+setdate[3]:setdate[3])+"/2023"
+  res.send(timeString+date+"\n"+calledgamesobj)
 })
 
 // Start the server
