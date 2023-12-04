@@ -1,41 +1,51 @@
-const dom = async () => {
-    const response = await fetch('https://auto-system.onrender.com/api/6');
-      const data = await response.json();
-      console.log(data);
-      const out = document.getElementById('OUT')
-      const dl = document.getElementById('_DL');
-      const sg = document.getElementById('_SG');
-      const ds = document.getElementById('_DS');
-      const fd = document.getElementById('_FD');
-      const gl = document.getElementById('_GL');
-      const gz = document.getElementById('_GZ');
-      out.innerText +=data.map((item) => item.today).join(' ');
-      // console.log(data[0].today)
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].name == 'DL_Satta') {
-          dl.innerHTML = data[i].today;
-        }
+           const dom = async () => {
+    const response = await fetch("https://auto-system.onrender.com/api/6");
+    const data = await response.json();
+    console.log(data);
+    <!--const out = document.getElementById('OUT')-->
+    const dl = document.getElementById('_DL');
+    const sg = document.getElementById('_SG');
+    const ds = document.getElementById('_DS');
+    const fd = document.getElementById('_FD');
+    const gl = document.getElementById('_GL');
+    const gz = document.getElementById('_GZ');
+    <!--yesterday result id-->
+    const o_dl = document.getElementById('O_DL');
+    const o_sg = document.getElementById('O_SG');
+    const o_ds = document.getElementById('O_DS');
+    const o_fd = document.getElementById('O_FD');
+    const o_gl = document.getElementById('O_GL');
+    const o_gz = document.getElementById('O_GZ');
+    <!--out.innerText += data.map((item) => item.today).join(' ');-->
+    // console.log(data[0].today)
+    for (let i = 0; i < data.length; i++) {
         if (data[i].name == 'delhi bazar') {
-          dl.innerHTML = data[i].today;
+            dl.innerText = data[i].today;
+            o_dl.innerText = data[i].yesterday;
         }
         if (data[i].name == 'shri ganesh') {
-          sg.innerHTML = data[i].today;
+            sg.innerText = data[i].today;
+            o_sg.innerText = data[i].yesterday;
         }
-        if (data[i].name == 'disawer') {
-          ds.innerHTML = data[i].today;
+        if (data[i].name == 'disawar') {
+            ds.innerText = data[i].today;
+            o_ds.innerText = data[i].yesterday
         }
         if (data[i].name == 'faridabad') {
-          fd.innerHTML = data[i].today;
+            fd.innerText = data[i].today;
+            o_fd.innerText = data[i].yesterday;
         }
         if (data[i].name == 'gali') {
-          gl.innerHTML = data[i].today;
+            gl.innerText = data[i].today;
+            o_gl.innerText = data[i].yesterday;
         }
         if (data[i].name == 'gaziyabad') {
-          gz.innerHTML = data[i].today;
+            gz.innerText = data[i].today;
+            o_gz.innerText = data[i].yesterday;
         }
-      }
-  }
-  dom();
+    }
+}
+dom();
 setInterval(() => {
     dom();
 }, 10000);
