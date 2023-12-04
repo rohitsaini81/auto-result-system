@@ -19,7 +19,7 @@
     // <!--out.innerText += data.map((item) => item.today).join(' ');-->
     // console.log(data[0].today)
     for (let i = 0; i < data.length; i++) {
-        if (data[i].name == 'delhi bazar' && data[i].today.length > 5) {
+        if (data[i].name == 'delhi bazar' && data[i].today.length < 5) {
             dl.innerText = data[i].today;
             o_dl.innerText = data[i].yesterday;
         }
@@ -27,19 +27,19 @@
             sg.innerText = data[i].today;
             o_sg.innerText = data[i].yesterday;
         }
-        if (data[i].name == 'disawar' && data[i].today.length > 5) {
+        if (data[i].name == 'disawar' && data[i].today.length < 5) {
             ds.innerText = data[i].today;
             o_ds.innerText = data[i].yesterday
         }
-        if (data[i].name == 'faridabad' && data[i].today.length > 5) {
+        if (data[i].name == 'faridabad' && data[i].today.length < 5) {
             fd.innerText = data[i].today;
             o_fd.innerText = data[i].yesterday;
         }
-        if (data[i].name == 'gali' && data[i].today.length > 5) {
+        if (data[i].name == 'gali' && data[i].today.length < 5) {
             gl.innerText = data[i].today;
             o_gl.innerText = data[i].yesterday;
         }
-        if (data[i].name == 'gaziyabad' && data[i].today.length > 5) {
+        if (data[i].name == 'gaziyabad' && data[i].today.length < 5) {
             gz.innerText = data[i].today;
             o_gz.innerText = data[i].yesterday;
         }
