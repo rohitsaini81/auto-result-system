@@ -21,8 +21,8 @@ const dom = async () => {
     console.log(data);
 
     for (let i = 0; i < data.length; i++) {
-        console.log("rohitsaini",data[i].today.length)
-        if (data[i].name == 'delhi bazar' && (data[i].today.length() < 5) && data[i].today.length != 0) {
+
+        if (data[i].name == 'delhi bazar' && data[i].today.length < 5 && data[i].today.length != 0) {
             dl.innerText = data[i].today;
             o_dl.innerText = data[i].yesterday;
         }
