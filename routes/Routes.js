@@ -6,6 +6,7 @@ import { DL_Satta, DL_bazar, Disawar, Faridabad, Gajiyabad, Gali, Shree_Ganesh, 
 import { calledgamesobj, setdate, timeString } from '../circle.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { mytiime } from '../servertime.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const router = express.Router()
@@ -40,8 +41,13 @@ router.get('/api/9', async (req, res) => {
     res.sendFile(__dirname + '/Tokyo.mp4')
 })
 router.get('/inf', (req, res) => {
-    const date = "12" + setdate[2] + (setdate[3] < 10 ? "0" + setdate[3] : setdate[3]) + "/2023"
-    res.send(timeString + date + "\n" + calledgamesobj)
+    const obj = {
+        'runningTime':setdate,
+        'servertime':mytiime,
+        'called':calledgamesobj,
+        'timestring':timeString
+    }
+    res.send(obj)
 })
 
 

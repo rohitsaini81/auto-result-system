@@ -20,6 +20,15 @@ const converted = async (time) => {
 // const singaporetime = await timefunc(Singapore)
 //   .then((res) => converted(res.dateTime))
 
+export const mytiime = ()=>{
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const currentTime = new Date().toLocaleTimeString('en-US', { timeZone });
+  return({
+    'Time Zone:': timeZone,
+    'Current Time:': currentTime
+  })
+
+}
 
 
  export const gettime = async() => {

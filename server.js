@@ -26,13 +26,7 @@ const dbcon = async (uri) => {
 import "./circle.js";
 
 await dbcon(uri);
-const mytiime = ()=>{
-  const date = new Date()
-  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  console.log('Time Zone:', timeZone);
-  console.log(date.toLocaleTimeString())
-}
-mytiime()
+
 
 app.use(router)
 
