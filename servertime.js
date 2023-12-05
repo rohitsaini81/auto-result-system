@@ -23,10 +23,11 @@ const converted = async (time) => {
 export const mytiime = ()=>{
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const systime = new Date().toLocaleTimeString('en-US', { timeZone });
-  
+  const currentTimeInKolkata = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Kolkata' });
+
   return({
-    'Time Zone:': timeZone,
-    'Current Time:': systime
+    'Time converted:': currentTimeInKolkata,
+    'System Time:': systime
   })
 
 }

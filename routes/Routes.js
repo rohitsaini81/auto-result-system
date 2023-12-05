@@ -41,13 +41,14 @@ router.get('/api/9', async (req, res) => {
     res.sendFile(__dirname + '/Tokyo.mp4')
 })
 router.get('/inf', (req, res) => {
+    const m = mytiime()
     const obj = {
         'runningTime':setdate,
-        'servertime':mytiime(),
         'called':calledgamesobj,
         'timestring':timeString
     }
-    res.send(obj)
+    const aray = [{m},{obj}]
+    res.send(aray)
 })
 
 
