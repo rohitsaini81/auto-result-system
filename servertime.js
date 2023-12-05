@@ -22,10 +22,11 @@ const converted = async (time) => {
 
 export const mytiime = ()=>{
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const currentTime = new Date().toLocaleTimeString('en-US', { timeZone });
+  const systime = new Date().toLocaleTimeString('en-US', { timeZone });
+  
   return({
     'Time Zone:': timeZone,
-    'Current Time:': currentTime
+    'Current Time:': systime
   })
 
 }

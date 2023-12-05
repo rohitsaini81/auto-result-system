@@ -43,7 +43,7 @@ router.get('/api/9', async (req, res) => {
 router.get('/inf', (req, res) => {
     const obj = {
         'runningTime':setdate,
-        'servertime':mytiime,
+        'servertime':mytiime(),
         'called':calledgamesobj,
         'timestring':timeString
     }
