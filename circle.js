@@ -45,7 +45,17 @@ const createdata = async (data) => {
   await writedata(data);
   // await dbclose();
 }
+const del = async(data) => {
+  await dbcon(uri)
+  try {
+    const pro = await Book.deleteOne(data);
+    return pro
+  }
+  catch (error) {
+    return (500, "errorv ", error.message);
+  }
 
+}
 
 const sleep = (ms) => {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -108,9 +118,9 @@ const Shree_Ganesh = async () => {
   try {
     const res = await result.Bfunc();
     const L = res[1].today;
-    
+
     if (L.length <= 2) {
-      console.log(L,'Processing...',L.length);
+      console.log(L, 'Processing...', L.length);
       const obj = {
         "name": res[1].name,
         "today": res[1].today,
@@ -205,9 +215,9 @@ const Disawar = async () => {
   console.log("\n Disawar");
   console.log(timeString)
   today = await gettime()
-  const custom =  await today.date.split('/');
-  const mydate = custom[0] + '/' + (custom[1].length>1?custom[1][1]:custom[1]) + '/' + custom[2];
-   setdate = mydate
+  const custom = await today.date.split('/');
+  const mydate = custom[0] + '/' + (custom[1].length > 1 ? custom[1][1] : custom[1]) + '/' + custom[2];
+  setdate = mydate
   console.log(mydate)
   result.Afunc().then((res) => {
 
@@ -346,5 +356,5 @@ function displayCurrentTime() {
   }
 }
 
-export { setdate, timeString, calledgamesobj }
+export { del,DL_Satta,DL_bazar,Shree_Ganesh,Faridabad,Gajiyabad,Gali,Disawar, setdate, timeString, calledgamesobj }
 setInterval(displayCurrentTime, 1000);

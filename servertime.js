@@ -22,7 +22,6 @@ const converted = async (time) => {
 
 
 
-
  export const gettime = async() => {
   const i = 'https://timeapi.io/api/Time/current/zone?timeZone=Asia/Kolkata';
  const date = await axios.get(i)

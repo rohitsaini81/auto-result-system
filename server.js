@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-
+import router from './routes/Routes.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,55 +19,28 @@ const dbcon = async (uri) => {
     await mongoose.connect(uri);
     console.log("\n db on!");
   } catch (error) {
-    console.log("ab kya hua \n",error);
+    console.log("ab kya hua \n", error);
   }
 };
 
 import "./circle.js";
-import { calledgamesobj, setdate, timeString } from './circle.js';
 
-dbcon(uri);
+await dbcon(uri);
+const mytiime = ()=>{
+  const date = new Date()
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  console.log('Time Zone:', timeZone);
+  console.log(date.toLocaleTimeString())
+}
+mytiime()
 
-// {
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-// Use the URL object to get the directory name
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-app.get('/',(req,res)=>{
-  res.sendFile(__dirname+'/index.html')
-})
-// }
-app.get('/api/6', async(req,res)=>{
-  const date = "12"+setdate[2]+(setdate[3]<10?"0"+setdate[3]:setdate[3])+"/2023"
-  try {
-    const pro = await Book.find({"date": setdate});
-    res.status(200).send(pro)
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-})
-app.get('/api/7', async(req,res)=>{
-  try {
-    const pro = await Book.find();
-    res.status(200).send(pro)
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-})
-app.get('/api/8', async(req,res)=>{
-  res.sendFile(__dirname+'/domcdn.js')
- })
-app.get('/api/9', async(req,res)=>{
- res.sendFile(__dirname+'/Tokyo.mp4')
-})
-app.get('/inf',(req,res)=>{
-  const date = "12"+setdate[2]+(setdate[3]<10?"0"+setdate[3]:setdate[3])+"/2023"
-  res.send(timeString+date+"\n"+calledgamesobj)
-})
+app.use(router)
+
+
+
 
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port http://127.0.0.1:${PORT}`);
-  });
+});
 // this is rohit saini
