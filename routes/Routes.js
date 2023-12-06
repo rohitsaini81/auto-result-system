@@ -47,6 +47,10 @@ router.get('/inf', (req, res) => {
         'called':calledgamesobj,
         'timestring':timeString
     }
+    router.get('/reset', async (req, res) => {l
+        calledgamesobj.map(e =>  e = false )
+        res.sendFile(calledgamesobj)
+    })
     const aray = [{m},{obj}]
     res.send(aray)
 })
