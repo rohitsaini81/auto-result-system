@@ -78,6 +78,9 @@ export default class FetchResult {
       return('An error occurred while fetching data from the second website.');
     }
   }
+  Cfunc = async () => {
+    console.log("Cfunc");
+  }
   
 }
 

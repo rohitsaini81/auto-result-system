@@ -1,14 +1,9 @@
-import mongoose from 'mongoose';
 import Book from '../models/db.js'
-import dotenv from 'dotenv';
 import express from 'express';
 import { DL_Satta, DL_bazar, Disawar, Faridabad, Gajiyabad, Gali, Shree_Ganesh, del } from '../circle.js';
 import { calledgamesobj, setdate, timeString } from '../circle.js';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 import { mytiime } from '../servertime.js';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+
 const router = express.Router()
 
 
@@ -34,12 +29,15 @@ router.get('/api/7', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 })
-router.get('/api/8', async (req, res) => {
-    res.sendFile(__dirname + '/domcdn.js')
-})
-router.get('/api/9', async (req, res) => {
-    res.sendFile(__dirname + '/Tokyo.mp4')
-})
+router.get('/api/videos', (req, res) => {
+    const videos = [
+      { name: 'video1', url: '/files/video1.mp4' },
+      { name: 'video2', url: '/files/video2.mp4' },
+      { name: 'video3', url: '/files/Tokyo.mp4' },
+    ];
+  
+    res.json(videos);
+  });
 router.get('/inf', (req, res) => {
     const m = mytiime()
     const obj = {

@@ -1,10 +1,14 @@
 import mongoose from 'mongoose';
-import Book from './models/db.js';
 import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import router from './routes/Routes.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +31,7 @@ import "./circle.js";
 
 await dbcon(uri);
 
+app.use('/files', express.static(path.join(__dirname, 'files')));
 
 app.use(router)
 
