@@ -29,11 +29,14 @@ router.get('/api/7', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 })
-router.get('/api/videos', (req, res) => {
+router.get('/api/files', (req, res) => {
     const videos = [
       { name: 'video1', url: '/files/video1.mp4' },
       { name: 'video2', url: '/files/video2.mp4' },
       { name: 'video3', url: '/files/Tokyo.mp4' },
+      { name: 'JS CDN', url: '/files/domcdn.js' },
+      { name: 'Html file1', url: '/files/index.html' },
+      { name: 'Html file2', url: '/files/main.html' },
     ];
   
     res.json(videos);
