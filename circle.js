@@ -254,7 +254,7 @@ const data = [
 
   { name: "Faridabad", time: process.env.Faridabad || "18.20" },//->6.00
   { name: "Gajiyabad", time: process.env.Gajiyabad || "21.20" },//->9.00
-  { name: "Gali", time: process.env.Gali || "23.20" },//->11.00
+  { name: "Gali", time: process.env.Gali || "23.40" },//->11.00
   { name: "Disawar", time: process.env.Disawar || "5.25" },//-5.00
 ];
 
