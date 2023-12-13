@@ -216,7 +216,8 @@ const Disawar = async () => {
   console.log(timeString)
   today = await gettime()
   const custom = await today.date.split('/');
-  const mydate = custom[0] + '/' + (custom[1].length > 1 ? custom[1][1] : custom[1]) + '/' + custom[2];
+  const mydate = custom[0] + '/' + (custom[1].length > 9 ? custom[1][1] : custom[1]) + '/' + custom[2];
+  console.log(mydate)
   setdate = mydate
   console.log(mydate)
   result.Afunc().then((res) => {
