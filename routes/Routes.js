@@ -3,9 +3,9 @@ import express from 'express';
 import { DL_Satta, DL_bazar, Disawar, Faridabad, Gajiyabad, Gali, Shree_Ganesh, del } from '../circle.js';
 import { calledgamesobj, setdate, timeString } from '../circle.js';
 import { mytiime } from '../servertime.js';
-
+import FetchResult from '../hp-apifunc.js';
 const router = express.Router()
-
+const result = new FetchResult()
 
 
 router.get('/', (req, res) => {
@@ -105,6 +105,11 @@ router.get('/del/:id', async (req, res) => {
     res.send(data)
 })
 
+router.get('/testresult', async (req, res) => {
+    const data1 = await result.Afunc().then(data => data)
+    const data2 = await result.Bfunc().then(data => data)
+    res.send([data1, data2])
+})
 
 
 export default router
