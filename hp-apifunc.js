@@ -78,11 +78,74 @@ export default class FetchResult {
       return('An error occurred while fetching data from the second website.');
     }
   }
+
+
+
   Cfunc = async () => {
     console.log("Cfunc");
-  }
+   const cfunresult= await axios.get("https://satta-king-online.in")
+  .then(response => {
+    const html = response.data;
+    const $ = cheerio.load(html);
+
+    const result = [];
+
+    $('.row .onlinecolumn').each((index, element) => {
+      const name = $(element).find('.onlinename2').text().trim();
+      const time = $(element).find('.time').text().trim();
+      const lastNumber = $(element).find('.onlinenumber').first().text().trim();
+      const todayNumber = $(element).find('.onlinenumber').last().text().trim();
+
+      switch (name) {
+        case 'DISAWER':
+          result.push({
+            name,
+            time,
+            lastNumber,
+            todayNumber,
+          });
+          break;
+        case 'GALI':
+          result.push({
+            name,
+            time,
+            lastNumber,
+            todayNumber,
+          });
+          break;
+        case 'GAZIYABAD':
+          result.push({
+            name,
+            time,
+            lastNumber,
+            todayNumber,
+          });
+          break;
+        case 'FARIDABAD':
+          result.push({
+            name,
+            time,
+            lastNumber,
+            todayNumber,
+          });
+          break;
+          default:
+            break;
+          
+      }
+      // console.log(name,time,lastNumber,todayNumber);
+
+    });
+    // console.log(result);
+    return (result);
+  })
+  .catch(error => {
+    return('Error fetching the HTML:', error);
+  });
+  return cfunresult;
+}
+
   
 }
 
-
-
+// const result = new FetchResult();

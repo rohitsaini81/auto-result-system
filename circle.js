@@ -68,8 +68,20 @@ let faridabadCalled = false;
 let gajiyabadCalled = false;
 let galiCalled = false;
 let disawarCalled = false;
+let test1Called = false;
 
-
+// test1 ------------------>
+const test1 = async () => {
+  if (test1Called) {
+    return false;
+  }
+  console.log("test1");
+  result.Cfunc().then((res) => {
+    console.log(res);
+  })
+  return true;
+}
+  
 
 // Dl_Satta ------------------>
 const DL_Satta = async () => {
@@ -80,6 +92,9 @@ const DL_Satta = async () => {
   }
 
   console.log("DL_Satta");
+  result.Cfunc().then((res) => {
+    console.log(res);
+  })
   const obj = { name: "DL_Satta", today: "00", yesterday: "-0", date: setdate }
   createdata(obj);
   dlSattaCalled = true;
@@ -190,6 +205,9 @@ const Gali = () => {
     return false;
   }
   console.log("Gali");
+  result.Cfunc().then((res)=>{
+    console.log(res);
+  })
   result.Afunc().then((res) => {
     const obj = {
       "name": "gali",
@@ -247,7 +265,8 @@ const Disawar = async () => {
 
 
 const data = [
-  { name: "DL_Satta", time: process.env.DL_Satta || "1.00" },//->0.00
+  { name: "test1", time: process.env.DL_Satta || "18.15" },//->0.00
+  { name: "DL_Satta", time: process.env.DL_Satta || "20.00" },//->0.00
 
   { name: "DL_bazar", time: process.env.DL_bazar || "15.20" },//->3.15 
   { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.51" },//->4.50
@@ -310,6 +329,11 @@ function displayCurrentTime() {
     if (matchingNames.length > 0) {
       matchingNames.forEach((item) => {
         switch (item.name) {
+          case "test1":
+            if (test1()){
+              test1Called = true;
+            }
+            break;
           case "DL_Satta":
             if (DL_Satta()) {
               dlSattaCalled = true;
