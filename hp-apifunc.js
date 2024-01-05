@@ -145,7 +145,8 @@ export default class FetchResult {
     return cfunresult;
   }
 
-  sttakingfast = async (url) => {
+  sttakingfast = async () => {
+    const url = 'https://satta-king-fast.com';
     try {
       const response = await axios.get(url);
       const html = response.data;
@@ -184,7 +185,7 @@ const fetch = new FetchResult
 // Example usage:
 let url = 'https://satta-king-fast.com';
 
-fetch.sttakingfast(url)
+fetch.sttakingfast()
   .then(todayNumbers => {
     console.log('Today Numbers:', todayNumbers);
   })
