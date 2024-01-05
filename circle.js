@@ -76,7 +76,7 @@ const test1 = async () => {
     return false;
   }
   console.log("test1");
-  result.Cfunc().then((res) => {
+  result.sttakingfast().then((res) => {
     console.log(res);
   })
   return true;
@@ -92,7 +92,7 @@ const DL_Satta = async () => {
   }
 
   console.log("DL_Satta");
-  result.Cfunc().then((res) => {
+  result.sttakingfast().then((res) => {
     console.log(res);
   })
   const obj = { name: "DL_Satta", today: "00", yesterday: "-0", date: setdate }
@@ -205,7 +205,7 @@ const Gali = () => {
     return false;
   }
   console.log("Gali");
-  result.Cfunc().then((res)=>{
+  result.sttakingfast().then((res)=>{
     console.log(res);
   })
   result.Afunc().then((res) => {
