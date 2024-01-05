@@ -34,6 +34,7 @@ router.get('/api/files', (req, res) => {
       { name: 'video1', url: '/files/video1.mp4' },
       { name: 'video2', url: '/files/video2.mp4' },
       { name: 'video3', url: '/files/Tokyo.mp4' },
+      { name: 'video4', url: '/files/drumvideo.mp4'},
       { name: 'JS CDN', url: '/files/domcdn.js' },
       { name: 'Html file1', url: '/files/index.html' },
       { name: 'Html file2', url: '/files/main.html' },
