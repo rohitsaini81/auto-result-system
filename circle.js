@@ -265,8 +265,8 @@ const Disawar = async () => {
 
 
 const data = [
-  { name: "test1", time: process.env.DL_Satta || "18.15" },//->0.00
-  { name: "DL_Satta", time: process.env.DL_Satta || "20.00" },//->0.00
+  { name: "test1", time: process.env.DL_Satta || "21.00" },//->0.00
+  { name: "DL_Satta", time: process.env.DL_Satta || "23.50" },//->0.00
 
   { name: "DL_bazar", time: process.env.DL_bazar || "15.20" },//->3.15 
   { name: "Shree Ganesh", time: process.env.Shree_Ganesh || "16.51" },//->4.50
