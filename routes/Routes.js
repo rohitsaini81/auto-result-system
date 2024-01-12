@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
 })
 // }
 router.get('/api/6', async (req, res) => {
-    const date = "12" + setdate[2] + (setdate[3] < 10 ? "0" + setdate[3] : setdate[3]) + "/2023"
+    const date = "1" + setdate[2] + (setdate[3] < 10 ? "0" + setdate[3] : setdate[3]) + "/2023"
     try {
         const pro = await Book.find({ "date": setdate });
         res.status(200).send(pro)
