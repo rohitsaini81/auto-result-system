@@ -45,7 +45,7 @@ const createdata = async (data) => {
   await writedata(data);
   // await dbclose();
 }
-const del = async(data) => {
+const del = async (data) => {
   await dbcon(uri)
   try {
     const pro = await Book.deleteOne(data);
@@ -81,7 +81,7 @@ const test1 = async () => {
   })
   return true;
 }
-  
+
 
 // Dl_Satta ------------------>
 const DL_Satta = async () => {
@@ -108,9 +108,9 @@ const DL_bazar = async () => {
   }
   console.log("DL_bazar");
   let obj = {}
-  await result.Bfunc().then((res) => {
+  const out = await result.Bfunc().then((res) => {
     // console.log(res[0],res[0].today.length)
-    if(res[0].today.length<=2 && res[0].today !=""){
+    if (res[0].today.length <= 2 && res[0].today != "") {
       const obj = {
         name: res[0].name,
         today: res[0].today,
@@ -120,18 +120,22 @@ const DL_bazar = async () => {
       createdata(obj)
       console.log(obj)
       dlBazarCalled = true;
+      return true;
+
     }
-    else{
+    else {
       console.log(data[2])
       data[2].time += 0.01
       dlBazarCalled = false;
       console.log(data[2])
+      return false;
+
     }
 
   }).catch((e) => { console.log(e) });
 
   dlSattaCalled = false;
-  return true;
+  return out ? true : false
 };
 // Shree_Ganesh ------------------>
 const Shree_Ganesh = async () => {
@@ -139,36 +143,41 @@ const Shree_Ganesh = async () => {
     return false;
   }
   console.log("Shree_Ganesh");
-  result.Bfunc().then((res) => {
+  const out = await result.Bfunc().then((res) => {
     console.log(res[1])
-    if(res[1].today.length<=2 && res[1].today !=""){
-    const obj = {
-      "name": res[1].name,
-      "today": res[1].today,
-      "yesterday": res[1].yesterday,
-      "date": setdate
-    };
-    createdata(obj)
-    console.log("its done",obj)
-    shreeGaneshCalled = true;
-  }
-  else{
-    console.log(data[3])
-    data[3].time += 0.01
-    shreeGaneshCalled = false;
-    console.log("well no",data[3])
-  }
+    if (res[1].today.length <= 2 && res[1].today != "") {
+      const obj = {
+        "name": res[1].name,
+        "today": res[1].today,
+        "yesterday": res[1].yesterday,
+        "date": setdate
+      };
+      createdata(obj)
+      console.log("its done", obj)
+      shreeGaneshCalled = true;
+      return true;
+
+    }
+    else {
+      console.log(data[3])
+      data[3].time += 0.01
+      shreeGaneshCalled = false;
+      console.log("well no", data[3])
+      return false;
+
+    }
   }).catch((e) => console.log(e));
+  return out ? true : false
 };
 
 // ---------------------------->
-const Faridabad = () => {
+const Faridabad = async() => {
   if (faridabadCalled) {
     return false;
   }
   console.log("Faridabad");
-  result.Afunc().then((res) => {
-    if(res[1].faridabad.length<=2 && res[1].faridabad !=""){
+  const out = await result.Afunc().then((res) => {
+    if (res[1].faridabad.length <= 2 && res[1].faridabad != "") {
       const obj = {
         "name": "faridabad",
         "today": res[1].faridabad,
@@ -176,32 +185,36 @@ const Faridabad = () => {
         "date": setdate
       }
       // console.log(obj)
-      faridabadCalled = true;
-      console.log("its done",obj)
+      console.log("its done", obj)
       createdata(obj)
+      faridabadCalled = true;
+      return true;
+
     }
-    else{
+    else {
       console.log(data[4])
       data[4].time += 0.01
       faridabadCalled = false;
-      console.log("well no",data[4])
+      console.log("well no", data[4])
+      return false
     }
 
   }).catch((e) => console.log(e));
 
   shreeGaneshCalled = false;
-  return true;
+  return out ? true : false
 };
 // Gaizyabad ------------------>
-const Gajiyabad = () => {
+const Gajiyabad = async() => {
   if (gajiyabadCalled) {
     return false;
   }
   console.log("Gajiyabad");
   gajiyabadCalled = true;
-  result.Afunc().then((res) => {
+
+  const out = await result.Afunc().then((res) => {
     console.log(res[1])
-    if(res[1].gaziabad.length<=2 && res[1].gaziabad !=""){
+    if (res[1].gaziabad.length <= 2 && res[1].gaziabad != "") {
       const obj = {
         "name": "gaziyabad",
         "today": res[1].gaziabad,
@@ -213,20 +226,24 @@ const Gajiyabad = () => {
       // console.log(obj)
       createdata(obj)
       gajiyabadCalled = true;
-      console.log("its done",obj)
+      console.log("its done", obj)
+      return true;
+
     }
-    else{
+    else {
       console.log(data[5])
       data[5].time += 0.01
       gajiyabadCalled = false;
-      console.log("well no",data[5])
+      console.log("well no", data[5])
+      return false
     }
   }).catch((e) => console.log(e));
   faridabadCalled = false;
-  return true;
+  return out ? true : false
+
 };
 // Gali ------------------>
-const Gali = () => {
+const Gali = async() => {
   if (galiCalled) {
     return false;
   }
@@ -234,8 +251,8 @@ const Gali = () => {
   // result.sttakingfast().then((res)=>{
   //   console.log(res);
   // })
-  result.Afunc().then((res) => {
-    if(res[1].gali.length<=2 && res[1].gali !=""){
+ const out =  result.Afunc().then((res) => {
+    if (res[1].gali.length <= 2 && res[1].gali != "") {
       const obj = {
         "name": "gali",
         "today": res[1].gali,
@@ -245,15 +262,23 @@ const Gali = () => {
       // console.log(obj)
       createdata(obj)
       galiCalled = true;
-      console.log("its done",obj)
+      console.log("its done", obj)
+      galiCalled = true;
+      return true;
     }
-    galiCalled = true;
+    else {
+      console.log(data[6])
+      data[6].time += 0.01
+      galiCalled = false;
+      console.log("well no", data[6])
+      return false
 
+    }
   }).catch((e) => console.log(e));
-
   gajiyabadCalled = false;
-  return true;
-};
+  return out?true:false
+}
+
 // Disawer ----------->
 const Disawar = async () => {
 
@@ -268,8 +293,8 @@ const Disawar = async () => {
   console.log(mydate)
   setdate = mydate
   console.log(mydate)
-  result.Afunc().then((res) => {
-    if(res[1].disawar.length<=2 && res[1].disawar !=""){
+  const out = result.Afunc().then((res) => {
+    if (res[1].disawar.length <= 2 && res[1].disawar != "") {
       const obj = {
         "name": "disawar",
         "today": res[1].disawer,
@@ -279,18 +304,18 @@ const Disawar = async () => {
       // console.log(obj)
       createdata(obj)
       disawarCalled = true;
-      console.log("its done",obj)
+      console.log("its done", obj)
     }
-    else{
+    else {
       console.log(data[7])
       data[7].time += 0.01
       disawarCalled = false;
-      console.log("well no",data[7])
+      console.log("well no", data[7])
     }
   })
     .catch((e) => console.log("disawer error 2"));
   galiCalled = false;
-  return true;
+  return out ? true : false
 };
 
 
@@ -302,11 +327,11 @@ const data = [
   { name: "DL_Satta", time: process.env.DL_Satta || "20.00" },//->0.00
 
   { name: "DL_bazar", time: process.env.DL_bazar || 15.20 },//->3.15 
-  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || 16.51},//->4.50
+  { name: "Shree Ganesh", time: process.env.Shree_Ganesh || 16.51 },//->4.50
 
-  { name: "Faridabad", time: process.env.Faridabad || 18.20},//->6.00
-  { name: "Gajiyabad", time: process.env.Gajiyabad || 21.20},//->9.00
-  { name: "Gali", time: process.env.Gali || 23.50  },//  23.50 ->11.00
+  { name: "Faridabad", time: process.env.Faridabad || 18.20 },//->6.00
+  { name: "Gajiyabad", time: process.env.Gajiyabad || 21.20 },//->9.00
+  { name: "Gali", time: process.env.Gali || 23.50 },//  23.50 ->11.00
   { name: "Disawar", time: process.env.Disawar || 5.25 },//-5.00
 ];
 
@@ -363,7 +388,7 @@ function displayCurrentTime() {
       matchingNames.forEach((item) => {
         switch (item.name) {
           case "test1":
-            if (test1()){
+            if (test1()) {
               test1Called = true;
             }
             break;
@@ -414,5 +439,5 @@ function displayCurrentTime() {
   }
 }
 
-export { del,DL_Satta,DL_bazar,Shree_Ganesh,Faridabad,Gajiyabad,Gali,Disawar, setdate, timeString, calledgamesobj }
+export { del, DL_Satta, DL_bazar, Shree_Ganesh, Faridabad, Gajiyabad, Gali, Disawar, setdate, timeString, calledgamesobj }
 setInterval(displayCurrentTime, 1000);
