@@ -8,7 +8,9 @@ const schemas = new mongoose.Schema({
   date: { type: String }
 
 });
-
-const Sattaking = mongoose.model(process.env.COLLECTION, schemas);
+const collectionname = process.env.COLLECTION_NAME;
+// console.log("coll name "+collectionname)
+const Sattaking = mongoose.model(collectionname, schemas);
 
 export default Sattaking;
+

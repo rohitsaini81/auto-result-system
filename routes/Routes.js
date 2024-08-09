@@ -1,5 +1,6 @@
 import Book from '../models/db.js'
 import express from 'express';
+import __dirname from '../server.js';
 import { DL_Satta, DL_bazar, Disawar, Faridabad, Gajiyabad, Gali, Shree_Ganesh, del } from '../circle.js';
 import { calledgamesobj, setdate, timeString } from '../circle.js';
 import { mytiime } from '../servertime.js';
@@ -9,7 +10,7 @@ const result = new FetchResult()
 
 
 router.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/files/index.html')
 })
 // }
 router.get('/api/6', async (req, res) => {
